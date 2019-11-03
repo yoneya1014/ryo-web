@@ -1,0 +1,95 @@
+<link rel="stylesheet" type="text/css" href="/stylesheets/common/header.css"/>
+<script type="text/javascript" src="/javascripts/common/header.js"></script>
+<%
+var navArray = [{
+    'menu': '春潮寮について',
+    'menu_list': [
+        '寮務主事挨拶',
+        '寮の概要',
+        '入寮者数',
+        '設備（男子）について',
+        '設備（女子）について',
+        '寮生の日課について'
+    ]
+}, {
+    'menu': '入寮について',
+    'menu_list': [
+        '必要となる費用',
+        '女子寮担当者より'
+    ]
+}, {
+    'menu': '寮生会について',
+    'menu_list': [
+        '寮生会概要',
+        '男子寮総代挨拶',
+        '女子寮総代挨拶'
+    ]
+}, {
+    'menu': '寮行事について',
+    'menu_list': [
+        '今年度の行事の様子',
+        '過去の行事の様子'
+    ]
+}, {
+    'menu': 'お問い合わせ',
+    'menu_list': [
+        'アクセス・お問い合わせ先'
+    ]
+}];
+%>
+<header>
+    <div id="site-title">
+        <img id="site-logo" src="/images/site-logo.png"/>
+        <label style="font-size:1.8em;">函館高専&nbsp;</label>
+        <label style="font-size:2.5em;">春潮寮</label>
+    </div>
+    <nav>
+        <ul class="nav-menulist">
+            <%
+            var count = 1;
+            navArray.forEach(function (value) {
+            %>
+                <li class="nav-menu">
+                    <a class="nav-menu-dropbutton" href="javascript:void(0);">
+                        <div class="nav-menu-label">
+                            <label><%= value.menu %></label>
+                        </div>
+                        <div class="triangle-div">
+                            <span class="triangle"></span>
+                        </div>
+                    </a>
+                    <%
+                    if(navArray.length == count){
+                    %>
+                        <ul class="nav-inner" id="nav-last">
+                            <%
+                            value.menu_list.forEach(function (innerLabel) {
+                            %>
+                                <li><a class="nav-link" href="#"><%= innerLabel %></a></li>
+                            <%
+                            });
+                            %>
+                        </ul>
+                    <%
+                    }else{
+                    %>
+                        <ul class="nav-inner">
+                            <%
+                            value.menu_list.forEach(function (innerLabel) {
+                            %>
+                                <li><a class="nav-link" href="#"><%= innerLabel %></a></li>
+                            <%
+                            });
+                            %>
+                        </ul>
+                    <%
+                    }
+                    %>
+                </li>
+            <%
+                count++;
+            });
+            %>
+        </ul>
+    </nav>
+</header>
