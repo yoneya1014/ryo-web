@@ -39,18 +39,18 @@ var navArray = [{
 %>
 <header>
     <div id="site-title">
-        <img id="site-logo" src="/images/site-logo.png"/>
+        <img id="site-logo" src="/images/common/site-logo.png"/>
         <label style="font-size:1.8em;">函館高専&nbsp;</label>
         <label style="font-size:2.5em;">春潮寮</label>
     </div>
     <nav>
-        <ul class="nav-menulist">
+        <ul class="nav-menu-list">
             <%
             var count = 1;
             navArray.forEach(function (value) {
             %>
                 <li class="nav-menu">
-                    <a class="nav-menu-dropbutton" href="javascript:void(0);">
+                    <a class="nav-menu-drop-button" href="javascript:void(0);">
                         <div class="nav-menu-label">
                             <label><%= value.menu %></label>
                         </div>
