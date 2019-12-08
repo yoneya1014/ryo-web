@@ -1,12 +1,21 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+require('dotenv').config();
+const createError = require('http-errors');
+const express = require('express');
+const session = require('express-session');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
+const logger = require('morgan');
 
-var indexRouter = require('./routes/index');
+//router file
+const indexRouter = require('./routes/index');
+const contactRouter = require('./routes/contact');
+const adminIndexRouter = require('./routes/admin/index');
+const signInRouter = require('./routes/admin/signIn');
+const signOutRouter = require('./routes/admin/signOut');
+const initRouter = require('./routes/admin/init');
 
-var app = express();
+const app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -18,7 +27,23 @@ app.use(express.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+//session setup
+app.use(session({
+    secret: 'secret',
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        maxAge: 30 * 60 * 1000
+    }
+}));
+
+//include router config
 app.use('/', indexRouter);
+app.use('/contact', contactRouter);
+app.use('/admin', adminIndexRouter);
+app.use('/admin/signin', signInRouter);
+app.use('/admin/signout', signOutRouter);
+app.use('/admin/init', initRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -33,7 +58,7 @@ app.use(function (err, req, res, next) {
 
     // render the error page
     res.status(err.status || 500);
-    res.render('error');
+    res.render('common/error');
 });
 
 module.exports = app;

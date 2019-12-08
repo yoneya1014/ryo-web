@@ -1,47 +1,97 @@
 <link rel="stylesheet" type="text/css" href="/stylesheets/common/header.css"/>
 <script type="text/javascript" src="/javascripts/common/header.js"></script>
 <%
-var navArray = [{
-    'menu': '春潮寮について',
-    'menu_list': [
-        '寮務主事挨拶',
-        '寮の概要',
-        '入寮者数',
-        '設備（男子）について',
-        '設備（女子）について',
-        '寮生の日課について'
-    ]
-}, {
-    'menu': '入寮について',
-    'menu_list': [
-        '必要となる費用',
-        '女子寮担当者より'
-    ]
-}, {
-    'menu': '寮生会について',
-    'menu_list': [
-        '寮生会概要',
-        '男子寮総代挨拶',
-        '女子寮総代挨拶'
-    ]
-}, {
-    'menu': '寮行事について',
-    'menu_list': [
-        '今年度の行事の様子',
-        '過去の行事の様子'
-    ]
-}, {
-    'menu': 'お問い合わせ',
-    'menu_list': [
-        'アクセス・お問い合わせ先'
-    ]
-}];
+const navArray = [
+    {
+        'menu': '春潮寮について',
+        'menu_list': [
+            {
+                'label': '寮務主事挨拶',
+                'link': '#'
+            },
+            {
+                'label': '寮の概要',
+                'link': '#'
+            },
+            {
+                'label': '入寮者数',
+                'link': '#'
+            },
+            {
+                'label': '設備（男子）について',
+                'link': '#'
+            },
+            {
+                'label': '設備（女子）について',
+                'link': '#'
+            },
+            {
+                'label': '寮生の日課について',
+                'link': '#'
+            }
+        ]
+    },
+    {
+        'menu': '入寮について',
+        'menu_list': [
+            {
+                'label': '必要となる費用',
+                'link': '#'
+            },
+            {
+                'label': '女子寮担当者より',
+                'link': '#'
+            }
+        ]
+    },
+    {
+        'menu': '寮生会について',
+        'menu_list': [
+            {
+                'label': '寮生会概要',
+                'link': '#'
+            },
+            {
+                'label': '男子寮総代挨拶',
+                'link': '#'
+            },
+            {
+                'label': '女子寮総代挨拶',
+                'link': '#'
+            }
+        ]
+    },
+    {
+        'menu': '寮行事について',
+        'menu_list': [
+            {
+                'label': '今年度の行事の様子',
+                'link': '#'
+            },
+            {
+                'label': '過去の行事の様子',
+                'link': '#'
+            }
+        ]
+    },
+    {
+        'menu': 'お問い合わせ',
+        'menu_list': [
+            {
+                'label': 'アクセス・お問い合わせ',
+                'link': '/contact'
+            }
+        ]
+    }
+];
 %>
 <header>
     <div id="site-title">
-        <img id="site-logo" src="/images/common/site-logo.png"/>
-        <label style="font-size:1.8em;">函館高専&nbsp;</label>
-        <label style="font-size:2.5em;">春潮寮</label>
+        <a href="/">
+            <img id="site-logo" src="/images/common/site-logo.png"/>
+            <label style="font-size:1.8em;">函館高専&nbsp;</label>
+            <label style="font-size:2.5em;">春潮寮</label>
+        </a>
     </div>
     <nav>
         <ul class="nav-menu-list">
@@ -65,7 +115,7 @@ var navArray = [{
                             <%
                             value.menu_list.forEach(function (innerLabel) {
                             %>
-                                <li><a class="nav-link" href="#"><%= innerLabel %></a></li>
+                                <li><a class="nav-link" href="<%= innerLabel.link %>"><%= innerLabel.label %></a></li>
                             <%
                             });
                             %>
@@ -77,7 +127,7 @@ var navArray = [{
                             <%
                             value.menu_list.forEach(function (innerLabel) {
                             %>
-                                <li><a class="nav-link" href="#"><%= innerLabel %></a></li>
+                                <li><a class="nav-link" href="<%= innerLabel.link %>"><%= innerLabel.label %></a></li>
                             <%
                             });
                             %>
