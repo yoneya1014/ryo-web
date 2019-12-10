@@ -15,4 +15,12 @@ router.get('/', signInCheck, (req, res) => {
     });
 });
 
+router.get('/error', (req, res) => {
+    if (req.session.error) {
+        res.render('admin/error');
+    } else {
+        res.send('');
+    }
+});
+
 module.exports = router;

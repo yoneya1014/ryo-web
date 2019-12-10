@@ -13,7 +13,9 @@ router.get('/', (req, res) => {
         if (data.length === 0) {
             res.redirect('/admin/init');
         } else {
-            res.render('admin/signIn');
+            res.render('admin/signIn', {
+                message: ''
+            });
         }
     });
 });
@@ -24,7 +26,9 @@ router.post('/', (req, res) => {
     user.find((err, data) => {
         if (err) {
             console.log(err);
-            res.render('admin/signIn');
+            res.render('admin/signIn', {
+                message: '予期せぬエラーが発生しました'
+            });
         }
         if (data.length === 0) {
             res.redirect('/admin/init');
@@ -33,10 +37,14 @@ router.post('/', (req, res) => {
                 req.session.user = username;
                 res.redirect('/admin');
             } else {
-                res.redirect('/admin/signin');
+                res.render('admin/signIn', {
+                    message: 'ユーザー名、またはパスワードが正しくありません'
+                });
             }
         } else {
-            res.redirect('/admin/signin');
+            res.render('admin/signIn', {
+                message: 'ユーザー名、またはパスワードが正しくありません'
+            });
         }
     });
 });

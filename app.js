@@ -7,13 +7,16 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const logger = require('morgan');
 
-//router file
+//router file (Client)
 const indexRouter = require('./routes/index');
 const contactRouter = require('./routes/contact');
+
+//router file (Admin)
 const adminIndexRouter = require('./routes/admin/index');
 const signInRouter = require('./routes/admin/signIn');
 const signOutRouter = require('./routes/admin/signOut');
 const initRouter = require('./routes/admin/init');
+const changeAdminDataRouter = require('./routes/admin/changeAdminData');
 
 const app = express();
 
@@ -37,13 +40,16 @@ app.use(session({
     }
 }));
 
-//include router config
+//include router config (Client)
 app.use('/', indexRouter);
 app.use('/contact', contactRouter);
+
+//include router config (Admin)
 app.use('/admin', adminIndexRouter);
 app.use('/admin/signin', signInRouter);
 app.use('/admin/signout', signOutRouter);
 app.use('/admin/init', initRouter);
+app.use('/admin/changeadmindata', changeAdminDataRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
