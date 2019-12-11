@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <link type="text/css" rel="stylesheet" href="/stylesheets/bootstrap/bootstrap.min.css"/>
+    <script type="text/javascript" src="/javascripts/jquery/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="/javascripts/bootstrap/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/javascripts/popper/popper.min.js"></script>
+    <script type="text/javascript">
+        $(() => {
+            $(window).on('load', () => {
+                const container = $('.container');
+                const imgHtml = '';
+                const imageCount = <%= image_count %>;
+                for (let count = 0; count < imageCount; count++) {
+
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+<main>
+    <form action="<%= post_url %>" name="edittopics" method="post">
+        <label for="title">記事のタイトル：</label>
+        <input type="text" name="title" id="title" value="<%= title %>"/>
+        <label for="description">記事の概要：</label>
+        <textarea name="description" id="description"><%= description %></textarea>
+        <label for="content">記事の詳細；</label>
+        <textarea name="content" id="content"><%= content %></textarea>
+        <label for="imgfiles">記事の画像：</label>
+        <div class="container">
+
+        </div>
+        <input type="file" accept="image/*" name="imgfiles" id="imgfiles" multiple/>
+        <button type="submit">記事の登録</button>
+    </form>
+</main>
+</body>
+</html>

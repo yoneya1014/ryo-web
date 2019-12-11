@@ -3,6 +3,8 @@ const express = require('express');
 const router = express.Router();
 const path = require('path');
 const fs = require('fs');
+const topicsModel = require('../../models/topicsModel');
+const topics = topicsModel.topics;
 
 const signInCheck = (req, res, next) => {
     if (req.session.user) {
@@ -23,18 +25,21 @@ router.get('/writenewtopics', signInCheck, (req, res) => {
 });
 
 router.post('/writenewtopics', signInCheck, (req, res) => {
-    const now = new Date();
+    const title = req.body.title;
+    const description = req.body.description;
+    const content = req.body.content;
+    let now = new Date();
     const time = now.toFormat('YYYY_MM_DD_HH24_MI_SS');
-    const savePath = 'public/images/topics/' + time;
+    now.setTime(now.getTime() + 1000 * 60 * 60 * 9);
+    const savePath = 'public/images/topics/' + time + '/';
     if (!fs.existsSync(savePath)) {
         fs.mkdirSync(savePath);
     }
     let count = 0;
-    console.log(req.files);
     req.files.imgfiles.forEach((image) => {
         console.log(image);
         const imgExt = path.extname(image.name);
-        const newImgName = '/img' + String(count) + imgExt;
+        const newImgName = 'img' + String(count) + imgExt;
         fs.writeFile(savePath + newImgName, image.data, (err) => {
             if (err) {
                 console.log(err);
@@ -44,7 +49,102 @@ router.post('/writenewtopics', signInCheck, (req, res) => {
         });
         count++;
     });
-    res.redirect('/admin/managetopics');
+    const imageUrl = savePath.substr(7);
+    const topicsData = new topics({
+        title: title,
+        description: description,
+        content: content,
+        image_url: imageUrl,
+        date: now
+    });
+    topicsData.save((err) => {
+        if (err) {
+            console.log(err);
+            req.session.error = true;
+            res.redirect('/admin/error');
+        } else {
+            res.redirect('/admin/managetopics');
+        }
+    });
 });
+
+//過去の記事一覧表示用ページ
+router.get('/edittopics/:year', signInCheck, (req, res) => {
+    topics.find({
+        date: {
+            $gte: new Date(req.params.year + '-01-01T00:00:00+09:00'),
+            $lt: new Date(req.params.year + '-12-31T23:59:59+09:00'),
+        }
+    }, (err, data) => {
+        if (err) {
+            console.log(err);
+            req.session.error = true;
+            res.redirect('/admin/error');
+        } else {
+            let dates = [];
+            let objId = [];
+            let count = 0;
+            data.forEach((value) => {
+                let date = new Date(value.date);
+                date.setTime(date.getTime() - 1000 * 60 * 60 * 9);
+                dates[count] = date;
+                objId[count] = value._id;
+                console.log(value._id);
+                count++;
+            });
+            res.render('admin/listTopics', {
+                dates: dates,
+                objid: objId
+            });
+        }
+    });
+});
+
+//過去の記事の削除用処理
+router.get('/edittopics/delete/:id', signInCheck, (req, res) => {
+    const objId = req.params.id;
+    topics.findOne({
+        _id: objId
+    }, (err, data) => {
+        if (err) {
+            console.log(err);
+            req.session.error = true;
+            res.redirect('/admin/error');
+        } else {
+            const imgFiles = fs.readdirSync('public/' + data.image_url);
+            imgFiles.forEach((file) => {
+                fs.unlinkSync('public/' + data.image_url + file);
+            });
+            fs.rmdirSync('public/' + data.image_url);
+            data.remove();
+            res.redirect('/admin/managetopics/edittopics/' + new Date().toFormat('YYYY'));
+        }
+    });
+});
+
+//過去のページの編集ページ（開発中）
+/*router.get('/edittopics/edit/:timestamp', signInCheck, (req, res) => {
+    const date = new Date(req.params.timestamp);
+    topics.findOne({
+        date: date
+    }, (err, data) => {
+        if(err){
+            console.log(err);
+            req.session.error = true;
+            res.redirect('/admin/error');
+        }else{
+            const imgCount = fs.readdirSync('public/' + data.image_url).length
+            res.render('admin/editTopics', {
+                title: data.title,
+                description: data.description,
+                content: data.content,
+                image_url: data.image_url,
+                image_count: imgCount,
+                date: data.date,
+                post_url: '/admin/managetopics/edittopics/edit/' + req.params.timestamp
+            });
+        }
+    });
+});*/
 
 module.exports = router;

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>過去の記事一覧</title>
+</head>
+<body>
+<main>
+    <% for(var count = 0; count < dates.length; count++) { %>
+        <p><%= dates[count].toFormat('YYYY年MM月DD日HH24時MI分SS秒'); %></p>
+        <a href="/admin/managetopics/edittopics/delete/<%= objid[count]; %>">削除</a>
+    <% } %>
+</main>
+</form>
+</body>
+</html>
