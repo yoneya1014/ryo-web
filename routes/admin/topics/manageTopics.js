@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 const path = require('path');
 const fs = require('fs');
-const topicsModel = require('../../models/topicsModel');
+const topicsModel = require('../../../models/topicsModel');
 const topics = topicsModel.topics;
 
 const signInCheck = (req, res, next) => {
@@ -14,42 +14,57 @@ const signInCheck = (req, res, next) => {
     }
 };
 
-//記事の管理ページトップ
+//投稿の管理ページトップ
 router.get('/', signInCheck, (req, res) => {
-    res.render('admin/manageTopics');
+    res.render('admin/topics/manageTopics');
 });
 
-//記事の新規作成ページ
+//投稿の新規作成ページ
 router.get('/writenewtopics', signInCheck, (req, res) => {
-    res.render('admin/writeNewTopics');
+    res.render('admin/topics//writeNewTopics');
 });
 
 router.post('/writenewtopics', signInCheck, (req, res) => {
     const title = req.body.title;
     const description = req.body.description;
     const content = req.body.content;
+    let imageUrl = '';
     let now = new Date();
     const time = now.toFormat('YYYY_MM_DD_HH24_MI_SS');
     now.setTime(now.getTime() + 1000 * 60 * 60 * 9);
-    const savePath = 'public/images/topics/' + time + '/';
-    if (!fs.existsSync(savePath)) {
-        fs.mkdirSync(savePath);
+    if (req.files !== null) {
+        const savePath = 'public/images/topics/' + time + '/';
+        if (!fs.existsSync(savePath)) {
+            fs.mkdirSync(savePath);
+        }
+        let count = 0;
+        if (req.files.imgfiles.length === undefined) {
+            const imgExt = path.extname(req.files.imgfiles.name);
+            const newImgName = 'img0' + imgExt;
+            fs.writeFile(savePath + newImgName, req.files.imgfiles.data, (err) => {
+                if (err) {
+                    console.log(err);
+                    req.session.error = true;
+                    res.redirect('/admin/error');
+                }
+            });
+        } else {
+            req.files.imgfiles.forEach((image) => {
+                const imgExt = path.extname(image.name);
+                const newImgName = 'img' + String(count) + imgExt;
+                fs.writeFile(savePath + newImgName, image.data, (err) => {
+                    if (err) {
+                        fs.rmdirSync(savePath);
+                        console.log(err);
+                        req.session.error = true;
+                        res.redirect('/admin/error');
+                    }
+                });
+                count++;
+            });
+        }
+        imageUrl = savePath.substr(7);
     }
-    let count = 0;
-    req.files.imgfiles.forEach((image) => {
-        console.log(image);
-        const imgExt = path.extname(image.name);
-        const newImgName = 'img' + String(count) + imgExt;
-        fs.writeFile(savePath + newImgName, image.data, (err) => {
-            if (err) {
-                console.log(err);
-                req.session.error = true;
-                res.redirect('/admin/error');
-            }
-        });
-        count++;
-    });
-    const imageUrl = savePath.substr(7);
     const topicsData = new topics({
         title: title,
         description: description,
@@ -68,7 +83,7 @@ router.post('/writenewtopics', signInCheck, (req, res) => {
     });
 });
 
-//過去の記事一覧表示用ページ
+//過去の投稿一覧表示用ページ
 router.get('/edittopics/:year', signInCheck, (req, res) => {
     topics.find({
         date: {
@@ -92,7 +107,7 @@ router.get('/edittopics/:year', signInCheck, (req, res) => {
                 console.log(value._id);
                 count++;
             });
-            res.render('admin/listTopics', {
+            res.render('admin/topics/listTopics', {
                 dates: dates,
                 objid: objId
             });
@@ -100,7 +115,7 @@ router.get('/edittopics/:year', signInCheck, (req, res) => {
     });
 });
 
-//過去の記事の削除用処理
+//過去の投稿の削除用処理
 router.get('/edittopics/delete/:id', signInCheck, (req, res) => {
     const objId = req.params.id;
     topics.findOne({
@@ -111,11 +126,15 @@ router.get('/edittopics/delete/:id', signInCheck, (req, res) => {
             req.session.error = true;
             res.redirect('/admin/error');
         } else {
-            const imgFiles = fs.readdirSync('public/' + data.image_url);
-            imgFiles.forEach((file) => {
-                fs.unlinkSync('public/' + data.image_url + file);
-            });
-            fs.rmdirSync('public/' + data.image_url);
+            if (data.image_url !== '') {
+                if (fs.existsSync('public/' + data.image_url)) {
+                    const imgFiles = fs.readdirSync('public/' + data.image_url);
+                    imgFiles.forEach((file) => {
+                        fs.unlinkSync('public/' + data.image_url + file);
+                    });
+                    fs.rmdirSync('public/' + data.image_url);
+                }
+            }
             data.remove();
             res.redirect('/admin/managetopics/edittopics/' + new Date().toFormat('YYYY'));
         }

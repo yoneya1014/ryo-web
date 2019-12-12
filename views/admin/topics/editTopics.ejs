@@ -21,18 +21,19 @@
 <body>
 <main>
     <form action="<%= post_url %>" name="edittopics" method="post">
-        <label for="title">記事のタイトル：</label>
+        <label for="title">投稿のタイトル：</label>
         <input type="text" name="title" id="title" value="<%= title %>"/>
-        <label for="description">記事の概要：</label>
+        <label for="description">投稿の概要：</label>
         <textarea name="description" id="description"><%= description %></textarea>
-        <label for="content">記事の詳細；</label>
+        <label for="content">投稿の詳細；</label>
         <textarea name="content" id="content"><%= content %></textarea>
-        <label for="imgfiles">記事の画像：</label>
+        <label for="imgfiles">投稿の画像：</label>
         <div class="container">
 
         </div>
         <input type="file" accept="image/*" name="imgfiles" id="imgfiles" multiple/>
-        <button type="submit">記事の登録</button>
+        <button type="submit">投稿の更新</button>
+        <a href="/admin/managetopics">トップへ戻る</a>
     </form>
 </main>
 </body>

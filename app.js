@@ -13,12 +13,13 @@ const indexRouter = require('./routes/index');
 const contactRouter = require('./routes/contact');
 
 //router file (Admin)
-const adminIndexRouter = require('./routes/admin/index');
-const signInRouter = require('./routes/admin/signIn');
-const signOutRouter = require('./routes/admin/signOut');
-const initRouter = require('./routes/admin/init');
-const changeAdminDataRouter = require('./routes/admin/changeAdminData');
-const manageTopicsRouter = require('./routes/admin/manageTopics');
+const adminIndexRouter = require('./routes/admin/common');
+const signInRouter = require('./routes/admin/manageuserinfo/signIn');
+const signOutRouter = require('./routes/admin/manageuserinfo/signOut');
+const initRouter = require('./routes/admin/manageuserinfo/init');
+const changeAdminDataRouter = require('./routes/admin/manageuserinfo/changeAdminData');
+const manageTopicsRouter = require('./routes/admin/topics/manageTopics');
+const manageFoodMenuRouter = require('./routes/admin/foodmenu/manageFoodMenu');
 
 const app = express();
 
@@ -54,6 +55,7 @@ app.use('/admin/signout', signOutRouter);
 app.use('/admin/init', initRouter);
 app.use('/admin/changeadmindata', changeAdminDataRouter);
 app.use('/admin/managetopics', manageTopicsRouter);
+app.use('/admin/managefoodmenu', manageFoodMenuRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

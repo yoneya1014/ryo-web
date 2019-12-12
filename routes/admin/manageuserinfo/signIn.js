@@ -1,7 +1,7 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
 const router = express.Router();
-const model = require('../../models/userModel');
+const model = require('../../../models/userModel');
 const user = model.user;
 
 router.get('/', (req, res) => {
@@ -13,7 +13,7 @@ router.get('/', (req, res) => {
         if (data.length === 0) {
             res.redirect('/admin/init');
         } else {
-            res.render('admin/signIn', {
+            res.render('admin/manageuserinfo/signIn', {
                 message: ''
             });
         }
@@ -26,7 +26,7 @@ router.post('/', (req, res) => {
     user.find((err, data) => {
         if (err) {
             console.log(err);
-            res.render('admin/signIn', {
+            res.render('admin/manageuserinfo/signIn', {
                 message: '予期せぬエラーが発生しました'
             });
         }
@@ -37,12 +37,12 @@ router.post('/', (req, res) => {
                 req.session.user = username;
                 res.redirect('/admin');
             } else {
-                res.render('admin/signIn', {
+                res.render('admin/manageuserinfo/signIn', {
                     message: 'ユーザー名、またはパスワードが正しくありません'
                 });
             }
         } else {
-            res.render('admin/signIn', {
+            res.render('admin/manageuserinfo/signIn', {
                 message: 'ユーザー名、またはパスワードが正しくありません'
             });
         }

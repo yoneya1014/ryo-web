@@ -10,14 +10,14 @@ const signInCheck = (req, res, next) => {
 };
 
 router.get('/', signInCheck, (req, res) => {
-    res.render('admin/index', {
+    res.render('admin/common/index', {
         user: req.session.user
     });
 });
 
 router.get('/error', (req, res) => {
     if (req.session.error) {
-        res.render('admin/error');
+        res.render('admin/common/error');
     } else {
         res.send('');
     }
