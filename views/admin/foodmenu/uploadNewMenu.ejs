@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>献立の管理</title>
+</head>
+<body>
+<form action="/admin/managefoodmenu/uploadnewmenu" name="uploadnewmenu" method="post" enctype="multipart/form-data">
+    <label for="from">適用開始日時</label>
+    <input type="date" name="from" id="from" required/>
+    <label for="to">適用終了日時</label>
+    <input type="date" name="to" id="to" required/>
+    <label for="menufile">献立表ファイル</label>
+    <input type="file" accept="application/pdf" name="menufile" id="menufile" required/>
+    <button type="submit">アップロード</button>
+</form>
+<a href="/admin">前のページへ戻る</a>
+</body>
+</html>

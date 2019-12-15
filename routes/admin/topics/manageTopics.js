@@ -21,7 +21,7 @@ router.get('/', signInCheck, (req, res) => {
 
 //投稿の新規作成ページ
 router.get('/writenewtopics', signInCheck, (req, res) => {
-    res.render('admin/topics//writeNewTopics');
+    res.render('admin/topics/writeNewTopics');
 });
 
 router.post('/writenewtopics', signInCheck, (req, res) => {
@@ -77,9 +77,8 @@ router.post('/writenewtopics', signInCheck, (req, res) => {
             console.log(err);
             req.session.error = true;
             res.redirect('/admin/error');
-        } else {
-            res.redirect('/admin/managetopics');
         }
+        res.redirect('/admin/managetopics');
     });
 });
 
@@ -95,23 +94,22 @@ router.get('/edittopics/:year', signInCheck, (req, res) => {
             console.log(err);
             req.session.error = true;
             res.redirect('/admin/error');
-        } else {
-            let dates = [];
-            let objId = [];
-            let count = 0;
-            data.forEach((value) => {
-                let date = new Date(value.date);
-                date.setTime(date.getTime() - 1000 * 60 * 60 * 9);
-                dates[count] = date;
-                objId[count] = value._id;
-                console.log(value._id);
-                count++;
-            });
-            res.render('admin/topics/listTopics', {
-                dates: dates,
-                objid: objId
-            });
         }
+        let dates = [];
+        let objId = [];
+        let count = 0;
+        data.forEach((value) => {
+            let date = new Date(value.date);
+            date.setTime(date.getTime() - 1000 * 60 * 60 * 9);
+            dates[count] = date;
+            objId[count] = value._id;
+            console.log(value._id);
+            count++;
+        });
+        res.render('admin/topics/listTopics', {
+            dates: dates,
+            objid: objId
+        });
     });
 });
 
@@ -125,19 +123,18 @@ router.get('/edittopics/delete/:id', signInCheck, (req, res) => {
             console.log(err);
             req.session.error = true;
             res.redirect('/admin/error');
-        } else {
-            if (data.image_url !== '') {
-                if (fs.existsSync('public/' + data.image_url)) {
-                    const imgFiles = fs.readdirSync('public/' + data.image_url);
-                    imgFiles.forEach((file) => {
-                        fs.unlinkSync('public/' + data.image_url + file);
-                    });
-                    fs.rmdirSync('public/' + data.image_url);
-                }
-            }
-            data.remove();
-            res.redirect('/admin/managetopics/edittopics/' + new Date().toFormat('YYYY'));
         }
+        if (data.image_url !== '') {
+            if (fs.existsSync('public/' + data.image_url)) {
+                const imgFiles = fs.readdirSync('public/' + data.image_url);
+                imgFiles.forEach((file) => {
+                    fs.unlinkSync('public/' + data.image_url + file);
+                });
+                fs.rmdirSync('public/' + data.image_url);
+            }
+        }
+        data.remove();
+        res.redirect('/admin/managetopics/edittopics/' + new Date().toFormat('YYYY'));
     });
 });
 
