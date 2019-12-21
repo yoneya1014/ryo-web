@@ -83,11 +83,11 @@ router.post('/writenewtopics', signInCheck, (req, res) => {
 });
 
 //過去の投稿一覧表示用ページ
-router.get('/edittopics/:year', signInCheck, (req, res) => {
+router.get('/listtopics/:year', signInCheck, (req, res) => {
     topics.find({
         date: {
             $gte: new Date(req.params.year + '-01-01T00:00:00+09:00'),
-            $lt: new Date(req.params.year + '-12-31T23:59:59+09:00'),
+            $lt: new Date(req.params.year + '-12-31T23:59:59+09:00')
         }
     }, (err, data) => {
         if (err) {
@@ -103,7 +103,6 @@ router.get('/edittopics/:year', signInCheck, (req, res) => {
             date.setTime(date.getTime() - 1000 * 60 * 60 * 9);
             dates[count] = date;
             objId[count] = value._id;
-            console.log(value._id);
             count++;
         });
         res.render('admin/topics/listTopics', {
@@ -114,7 +113,7 @@ router.get('/edittopics/:year', signInCheck, (req, res) => {
 });
 
 //過去の投稿の削除用処理
-router.get('/edittopics/delete/:id', signInCheck, (req, res) => {
+router.get('/listtopics/delete/:id', signInCheck, (req, res) => {
     const objId = req.params.id;
     topics.findOne({
         _id: objId
@@ -134,12 +133,12 @@ router.get('/edittopics/delete/:id', signInCheck, (req, res) => {
             }
         }
         data.remove();
-        res.redirect('/admin/managetopics/edittopics/' + new Date().toFormat('YYYY'));
+        res.redirect('/admin/managetopics/listtopics/' + new Date().toFormat('YYYY'));
     });
 });
 
 //過去のページの編集ページ（開発中）
-/*router.get('/edittopics/edit/:timestamp', signInCheck, (req, res) => {
+/*router.get('/listtopics/edit/:timestamp', signInCheck, (req, res) => {
     const date = new Date(req.params.timestamp);
     topics.findOne({
         date: date
@@ -157,7 +156,7 @@ router.get('/edittopics/delete/:id', signInCheck, (req, res) => {
                 image_url: data.image_url,
                 image_count: imgCount,
                 date: data.date,
-                post_url: '/admin/managetopics/edittopics/edit/' + req.params.timestamp
+                post_url: '/admin/managetopics/listtopics/edit/' + req.params.timestamp
             });
         }
     });

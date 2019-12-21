@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>過去の献立一覧</title>
+</head>
+<body>
+<main>
+    <% if(from_dates.length === 0){ %>
+        <p>該当する献立表はありません</p>
+    <% }else{
+    for(var count = 0; count < from_dates.length; count++) { %>
+        <p><%= from_dates[count].toFormat('YYYY年MM月DD日'); %>〜<%= to_dates[count].toFormat('YYYY年MM月DD日'); %></p>
+        <a href="/admin/managefoodmenu/listfoodmenu/delete/<%= objid[count]; %>">削除</a>
+    <% }
+    } %>
+    <br/>
+    <a href="/admin/managefoodmenu">前のページへ戻る</a>
+</main>
+</form>
+</body>
+</html>

@@ -53,4 +53,59 @@ router.post('/uploadnewmenu', signInCheck, (req, res) => {
     });
 });
 
+//過去の献立一覧表示用ページ
+router.get('/listfoodmenu/:year', signInCheck, (req, res) => {
+    foodMenu.find({
+        from: {
+            $gte: new Date(req.params.year + '-01-01T00:00:00+09:00'),
+            $lt: new Date(req.params.year + '-12-31T23:59:59+09:00')
+        }
+    }, (err, data) => {
+        if (err) {
+            console.log(err);
+            req.session.error = true;
+            res.redirect('/admin/error');
+        }
+        let fromDates = [];
+        let toDates = [];
+        let objId = [];
+        let count = 0;
+        data.forEach((value) => {
+            let fromDate = new Date(value.from);
+            fromDate.setTime(fromDate.getTime() - 1000 * 60 * 60 * 9);
+            let toDate = new Date(value.to);
+            toDate.setTime(toDate.getTime() - 1000 * 60 * 60 * 9);
+            fromDates[count] = fromDate;
+            toDates[count] = toDate;
+            objId[count] = value._id;
+            count++;
+        });
+        res.render('admin/foodmenu/listFoodMenu', {
+            from_dates: fromDates,
+            to_dates: toDates,
+            objid: objId
+        });
+    });
+});
+
+router.get('/listfoodmenu/delete/:id', signInCheck, (req, res) => {
+    const objId = req.params.id;
+    foodMenu.findOne({
+        _id: objId
+    }, (err, data) => {
+        if (err) {
+            console.log(err);
+            req.session.error = true;
+            res.redirect('/admin/error');
+        }
+        const from = new Date(data.from);
+        const filePath = 'public/other_objects/foodmenu/' + from.toFormat('YYYY_MM_DD') + '.pdf';
+        if (fs.existsSync(filePath)) {
+            fs.unlinkSync(filePath);
+        }
+        data.remove();
+        res.redirect('/admin/managefoodmenu/listfoodmenu/' + new Date().toFormat('YYYY'));
+    });
+});
+
 module.exports = router;
