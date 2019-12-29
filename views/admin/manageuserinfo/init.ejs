@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
+    <title>初期設定</title>
+    <meta charset="UTF-8">
 </head>
 <body>
 <main>
-    <form action="/admin/init" name="init" method="post">
-        <h1>登録</h1>
+    <h1>登録</h1>
+    <form role="form" action="/admin/init" name="init" method="post">
+        <input type="hidden" name="_csrf" value="<%= _csrf %>"/>
         <input type="text" name="username" placeholder="ユーザ名"/>
         <input type="password" name="password" placeholder="パスワード"/>
         <button type="submit">登録</button>

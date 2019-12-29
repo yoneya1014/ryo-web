@@ -1,6 +1,8 @@
+require('date-utils');
 const express = require('express');
 const router = express.Router();
 
+//サインイン済みかをチェック
 const signInCheck = (req, res, next) => {
     if (req.session.user) {
         next();
@@ -10,9 +12,7 @@ const signInCheck = (req, res, next) => {
 };
 
 router.get('/', signInCheck, (req, res) => {
-    res.render('admin/common/index', {
-        user: req.session.user
-    });
+    res.render('admin/common/index');
 });
 
 router.get('/error', (req, res) => {

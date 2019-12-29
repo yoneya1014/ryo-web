@@ -1,9 +1,12 @@
 const express = require('express');
+const bodyParser = require('body-parser');
+const csrf = require('csurf');
 const bcrypt = require('bcrypt');
 const router = express.Router();
 const userModel = require('../../../models/userModel');
 const user = userModel.user;
 
+//サインイン済みかをチェック
 const signInCheck = (req, res, next) => {
     if (req.session.user) {
         next();
@@ -12,24 +15,29 @@ const signInCheck = (req, res, next) => {
     }
 };
 
+//CSRF対策
+const csrfProtection = csrf({cookie: true});
+const parseForm = bodyParser.urlencoded({extended: false});
+
 //管理ユーザーの情報変更項目の選択ページ
 router.get('/', signInCheck, (req, res) => {
-    res.render('admin/manageuserinfo/changeAdminData', {
+    res.render('admin/manageuserinfo/changeAdminDataMenu', {
         user: req.session.user
     });
 });
 
 //管理ユーザー名変更用の処理
-router.get('/username', signInCheck, (req, res) => {
+router.get('/username', csrfProtection, signInCheck, (req, res) => {
     res.render('admin/manageuserinfo/changeUserProps', {
         user: req.session.user,
         target: 'ユーザー名',
         url_path: '/username',
-        message: ''
+        message: '',
+        _csrf: req.csrfToken()
     });
 });
 
-router.post('/username', signInCheck, (req, res) => {
+router.post('/username', parseForm, csrfProtection, signInCheck, (req, res) => {
     const oldName = req.body.old_object;
     const newName = req.body.new_object;
     user.find((err, data) => {
@@ -64,16 +72,17 @@ router.post('/username', signInCheck, (req, res) => {
 });
 
 //管理ユーザーのパスワード変更用の処理
-router.get('/password', signInCheck, (req, res) => {
+router.get('/password', csrfProtection, signInCheck, (req, res) => {
     res.render('admin/manageuserinfo/changeUserProps', {
         user: req.session.user,
         target: 'パスワード',
         url_path: '/password',
-        message: ''
+        message: '',
+        _csrf: req.csrfToken()
     });
 });
 
-router.post('/password', signInCheck, (req, res) => {
+router.post('/password', parseForm, csrfProtection, signInCheck, (req, res) => {
     const oldPassword = req.body.old_object;
     const newPassword = req.body.new_object;
     user.find((err, data) => {

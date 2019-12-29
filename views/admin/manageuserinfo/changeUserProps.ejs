@@ -8,7 +8,8 @@
 <% if(message !== ''){ %>
     <p><%= message %></p>
 <% } %>
-<form action="/admin/changeadmindata<%= url_path %>" name="changeobject" method="post">
+<form role="form" action="/admin/changeadmindata<%= url_path %>" name="changeobject" method="post">
+    <input type="hidden" name="_csrf" value="<%= _csrf %>"/>
     <label for="old_object">古い<%= target %>を入力：</label>
     <input type="text" name="old_object" id="old_object"/>
     <label for="new_object">新しい<%= target %>を入力：</label>

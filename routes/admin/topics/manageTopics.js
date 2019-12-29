@@ -1,11 +1,14 @@
 require('date-utils');
 const express = require('express');
+const bodyParser = require('body-parser');
+const csrf = require('csurf');
 const router = express.Router();
 const path = require('path');
 const fs = require('fs');
 const topicsModel = require('../../../models/topicsModel');
 const topics = topicsModel.topics;
 
+//サインイン済みかをチェック
 const signInCheck = (req, res, next) => {
     if (req.session.user) {
         next();
@@ -14,17 +17,23 @@ const signInCheck = (req, res, next) => {
     }
 };
 
+//CSRF対策
+const csrfProtection = csrf({cookie: true});
+const parseForm = bodyParser.urlencoded({extended: false});
+
 //投稿の管理ページトップ
 router.get('/', signInCheck, (req, res) => {
     res.render('admin/topics/manageTopics');
 });
 
 //投稿の新規作成ページ
-router.get('/writenewtopics', signInCheck, (req, res) => {
-    res.render('admin/topics/writeNewTopics');
+router.get('/writenewtopics', csrfProtection, signInCheck, (req, res) => {
+    res.render('admin/topics/writeNewTopics', {
+        _csrf: req.csrfToken()
+    });
 });
 
-router.post('/writenewtopics', signInCheck, (req, res) => {
+router.post('/writenewtopics', parseForm, csrfProtection, signInCheck, (req, res) => {
     const title = req.body.title;
     const description = req.body.description;
     const content = req.body.content;
@@ -136,30 +145,5 @@ router.get('/listtopics/delete/:id', signInCheck, (req, res) => {
         res.redirect('/admin/managetopics/listtopics/' + new Date().toFormat('YYYY'));
     });
 });
-
-//過去のページの編集ページ（開発中）
-/*router.get('/listtopics/edit/:timestamp', signInCheck, (req, res) => {
-    const date = new Date(req.params.timestamp);
-    topics.findOne({
-        date: date
-    }, (err, data) => {
-        if(err){
-            console.log(err);
-            req.session.error = true;
-            res.redirect('/admin/error');
-        }else{
-            const imgCount = fs.readdirSync('public/' + data.image_url).length
-            res.render('admin/editTopics', {
-                title: data.title,
-                description: data.description,
-                content: data.content,
-                image_url: data.image_url,
-                image_count: imgCount,
-                date: data.date,
-                post_url: '/admin/managetopics/listtopics/edit/' + req.params.timestamp
-            });
-        }
-    });
-});*/
 
 module.exports = router;

@@ -12,6 +12,7 @@
     "body-parser": "^1.19.0",
     "connect-mongo": "^3.1.2",
     "cookie-parser": "~1.4.4",
+    "csurf": "^1.10.0",
     "date-utils": "^1.2.21",
     "debug": "~2.6.9",
     "dotenv": "^8.2.0",
@@ -20,6 +21,7 @@
     "express-fileupload": "^1.1.6",
     "express-session": "^1.17.0",
     "fs": "0.0.1-security",
+    "helmet": "^3.21.2",
     "http-errors": "~1.6.3",
     "mongoose": "^5.7.10",
     "morgan": "~1.9.1"

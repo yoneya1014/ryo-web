@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
+//サインイン済みかをチェック
 const signInCheck = (req, res, next) => {
     if (req.session.user) {
         next();

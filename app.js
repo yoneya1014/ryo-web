@@ -4,15 +4,30 @@ const express = require('express');
 const session = require('express-session');
 const path = require('path');
 const cookieParser = require('cookie-parser');
-const bodyParser = require('body-parser');
 const logger = require('morgan');
 const fileUpload = require('express-fileupload');
+const helmet = require('helmet');
+const mongoStore = require('connect-mongo')(session);
+const mongoose = require('mongoose');
+const db_url = process.env.DB_STRING;
+
+//Connect Mongo DB
+mongoose.connect(db_url, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+}, (err, res) => {
+    if (err) {
+        console.log('Connection Failed:' + err);
+    } else {
+        console.log('Connection Succeed');
+    }
+});
 
 //router file (Client)
 const indexRouter = require('./routes/index');
 const contactRouter = require('./routes/contact');
 
-//router file (Admin)
+//router file (Administrator)
 const adminIndexRouter = require('./routes/admin/common');
 const signInRouter = require('./routes/admin/manageuserinfo/signIn');
 const signOutRouter = require('./routes/admin/manageuserinfo/signOut');
@@ -32,17 +47,29 @@ app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(fileUpload());
+app.use(fileUpload(undefined));
 
-//session setup
+//Session Setup
 app.use(session({
-    secret: 'secret',
+    secret: 'sasinoboru',
     resave: false,
     saveUninitialized: false,
     cookie: {
-        maxAge: 30 * 60 * 1000
-    }
+        httpOnly: true,
+        secure: false,
+        maxAge: 30 * 60 * 1000,
+        path: '/admin'
+        //secureオプションはhttps通信を利用できるときのみtrueにする。
+    },
+    store: new mongoStore({
+        url: db_url,
+        autoReconnect: true,
+        clear_interval: 3600
+    })
 }));
+
+//XSS Protection Setup
+app.use(helmet());
 
 //include router config (Client)
 app.use('/', indexRouter);
@@ -63,7 +90,7 @@ app.use(function (req, res, next) {
 });
 
 // error handler
-app.use(function (err, req, res, next) {
+app.use(function (err, req, res) {
     // set locals, only providing error in development
     res.locals.message = err.message;
     res.locals.error = req.app.get('env') === 'development' ? err : {};
