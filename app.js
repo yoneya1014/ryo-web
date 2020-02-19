@@ -37,6 +37,7 @@ const changeAdminDataRouter = require('./routes/admin/manageuserinfo/changeAdmin
 const manageContentRouter = require('./routes/admin/managecontent/manageContent');
 const manageTopicsRouter = require('./routes/admin/managecontent/manageTopics');
 const manageFoodMenuRouter = require('./routes/admin/managecontent/manageFoodMenu');
+const manageGreetingRouter = require('./routes/admin/managecontent/manageGreeting');
 
 const app = express();
 
@@ -87,6 +88,7 @@ app.use('/admin/changeadmindata', changeAdminDataRouter);
 app.use('/admin/managecontent', manageContentRouter);
 app.use('/admin/managecontent/topics', manageTopicsRouter);
 app.use('/admin/managecontent/foodmenu', manageFoodMenuRouter);
+app.use('/admin/managecontent/greeting', manageGreetingRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

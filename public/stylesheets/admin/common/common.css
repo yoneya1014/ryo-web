@@ -43,3 +43,64 @@ label {
     text-align: center;
     font-size: 1.7em;
 }
+
+#greeting_form {
+    width: 80%;
+}
+
+#greeting_text {
+    height: 8em;
+}
+
+.greeting_image {
+    width: 45%;
+    height: auto;
+    flex-grow: 1;
+    opacity: 0;
+}
+
+.centering-image {
+    margin: 5px;
+    width: 100%;
+    flex-direction: row;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#previous_image_view {
+    width: 45%;
+    height: auto;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#previous_image_space {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#next_image_view {
+    width: 45%;
+    height: auto;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#next_image_space {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#blank_space {
+    display: block;
+    width: 10%;
+}

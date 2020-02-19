@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="content-type" content="text/html" charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>寮務主事挨拶の編集 - 函館高専 春潮寮 Webページ</title>
+    <link type="text/css" rel="stylesheet" href="/stylesheets/bootstrap/bootstrap.min.css"/>
+    <link type="text/css" rel="stylesheet" href="/stylesheets/admin/common/common.css"/>
+    <script type="text/javascript" src="/javascripts/jquery/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="/javascripts/bootstrap/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/javascripts/popper/popper.min.js"></script>
+    <script type="text/javascript" src="/javascripts/admin/managecontent/previewImage.js"></script>
+    <script type="text/javascript">
+        $(() => {
+            $(document).ready(() => {
+                const imageUri = '/images/greetings/<%= person_type %><%= image_ext %>';
+                fetch(imageUri, {
+                    method: 'GET'
+                }).then(res => {
+                    if (res.status === 200) {
+                        $('#previous_image').attr('src', imageUri);
+                        $('#previous_image').css('opacity', 1);
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+<div class="top-title">
+    <label id="title_label">寮務主事挨拶の編集</label>
+</div>
+<main>
+    <form role="form" id="greeting_form" name="<%= person_type %>" action="/admin/managecontent/greeting/secretary"
+          method="post" enctype="multipart/form-data">
+        <input type="hidden" name="_csrf" value="<%= _csrf %>"/>
+        <div class="form-group">
+            <label for="greeting_text">挨拶文：</label>
+            <textarea class="form-control" id="greeting_text" name="greeting_text"
+                      required><%= greeting_text %></textarea>
+        </div>
+        <br/>
+        <div class="form-group">
+            <label for="greeting_image">挨拶画像：</label>
+            <br/>
+            <div class="centering-image">
+                <div id="previous_image_view">
+                    <label for="previous_image_space">古い画像</label>
+                    <div id="previous_image_space">
+                        <img id="previous_image" class="greeting_image"/>
+                    </div>
+                </div>
+                <span id="blank_space"></span>
+                <div id="next_image_view">
+                    <label for="next_image_space">新しい画像</label>
+                    <div id="next_image_space">
+                        <label>画像が選択されていません</label>
+                    </div>
+                </div>
+            </div>
+            <input name="imgfiles" class="form-control-file" type="file" accept="image/*" id="imgfiles" required/>
+        </div>
+        <button type="submit" class="btn btn-primary">登録</button>
+        <a class="btn btn-primary" href="/admin/managecontent/greeting">前のページへ戻る</a>
+    </form>
+</main>
+</body>
+</html>
