@@ -22,17 +22,17 @@ const parseForm = bodyParser.urlencoded({extended: false});
 
 //献立表の管理ページトップ
 router.get('/', signInCheck, (req, res) => {
-    res.render('admin/foodmenu/manageFoodMenu');
+    res.render('admin/managecontent/foodmenu/manageFoodMenu');
 });
 
 //献立表のアップロードページ
-router.get('/uploadnewmenu', csrfProtection, signInCheck, (req, res) => {
-    res.render('admin/foodmenu/uploadNewMenu', {
+router.get('/uploadnew', csrfProtection, signInCheck, (req, res) => {
+    res.render('admin/managecontent/foodmenu/uploadNewMenu', {
         _csrf: req.csrfToken()
     });
 });
 
-router.post('/uploadnewmenu', parseForm, csrfProtection, signInCheck, (req, res) => {
+router.post('/uploadnew', parseForm, csrfProtection, signInCheck, (req, res) => {
     const from = new Date(req.body.from);
     const to = new Date(req.body.to);
     const menuFile = req.files.menufile;
@@ -57,12 +57,12 @@ router.post('/uploadnewmenu', parseForm, csrfProtection, signInCheck, (req, res)
             req.session.error = true;
             res.redirect('/admin/error');
         }
-        res.redirect('/admin/managefoodmenu');
+        res.redirect('/admin/managecontent/foodmenu');
     });
 });
 
 //過去の献立一覧表示用ページ
-router.get('/listfoodmenu/:year', signInCheck, (req, res) => {
+router.get('/list/:year', signInCheck, (req, res) => {
     foodMenu.find({
         from: {
             $gte: new Date(req.params.year + '-01-01T00:00:00+09:00'),
@@ -88,7 +88,7 @@ router.get('/listfoodmenu/:year', signInCheck, (req, res) => {
             objId[count] = value._id;
             count++;
         });
-        res.render('admin/foodmenu/listFoodMenu', {
+        res.render('admin/managecontent/foodmenu/listFoodMenu', {
             from_dates: fromDates,
             to_dates: toDates,
             objid: objId
@@ -96,7 +96,7 @@ router.get('/listfoodmenu/:year', signInCheck, (req, res) => {
     });
 });
 
-router.get('/listfoodmenu/delete/:id', signInCheck, (req, res) => {
+router.get('/list/delete/:id', signInCheck, (req, res) => {
     const objId = req.params.id;
     foodMenu.findOne({
         _id: objId
@@ -112,7 +112,7 @@ router.get('/listfoodmenu/delete/:id', signInCheck, (req, res) => {
             fs.unlinkSync(filePath);
         }
         data.remove();
-        res.redirect('/admin/managefoodmenu/listfoodmenu/' + new Date().toFormat('YYYY'));
+        res.redirect('/admin/managecontent/foodmenu/list/' + new Date().toFormat('YYYY'));
     });
 });
 

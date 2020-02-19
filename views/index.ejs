@@ -1,9 +1,18 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="content-type" content="text/html" charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>函館高専 春潮寮</title>
+    <meta name="author" content="National Institute of Technology, Hakodate College">
+    <meta name="description" content="「函館高専 春潮寮」公式ホームページ">
+    <meta property="og:title" content="函館高専 春潮寮">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.hakodate-ct.ac.jp/~w-ryou/">
+    <meta property="og:image" content="https://www.hakodate-ct.ac.jp/~w-ryou/images/common/site-logo.png">
+    <meta property="og:site_name" content="函館高専 春潮寮">
+    <meta property="og:description" content="「函館高専 春潮寮」公式ホームページ">
     <link type="text/css" rel="stylesheet" href="/stylesheets/slick/slick-theme.css"/>
     <link type="text/css" rel="stylesheet" href="/stylesheets/bootstrap/bootstrap.min.css"/>
     <link type="text/css" rel="stylesheet" href="/stylesheets/slick/slick.css"/>
@@ -16,26 +25,26 @@
     <script type="text/javascript" src="/javascripts/twitter/widgets.js" async></script>
 </head>
 <body>
-
 <%- include('./common/header') %>
 <main>
+    <img src="/images/common/top-image.jpg" id="top-image"/>
     <ul class="slider">
         <%
-        for(var count = 0;count < 3;count++){
+        data.forEach(obj => {
         %>
             <li class="slide">
                 <a class="slide__link" href="#">
-                    <img src="/images/common/no-image.png" alt="image">
+                    <img src="<%= obj.image_url %>img0.png" alt="image">
                     <div class="slide__content-wrap">
                         <div class="slide__content">
-                            <h2 class="slide-title">タイトル</h2>
-                            <p class="slide-summary">テキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト</p>
+                            <h2 class="slide-title"><%= obj.title %></h2>
+                            <p class="slide-summary"><%= obj.description %></p>
                         </div>
                     </div>
                 </a>
             </li>
         <%
-        }
+        });
         %>
     </ul>
     <div class="news-archive-wrap">

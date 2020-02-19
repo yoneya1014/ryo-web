@@ -2,10 +2,10 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <title>献立の管理</title>
+    <title>献立のアップロード</title>
 </head>
 <body>
-<form role="form" action="/admin/managefoodmenu/uploadnewmenu" name="uploadnewmenu" method="post"
+<form role="form" action="/admin/managecontent/foodmenu/uploadnew" name="uploadnewmenu" method="post"
       enctype="multipart/form-data">
     <input type="hidden" name="_csrf" value="<%= _csrf %>"/>
     <label for="from">適用開始日時</label>
@@ -16,6 +16,6 @@
     <input type="file" accept="application/pdf" name="menufile" id="menufile" required/>
     <button type="submit">アップロード</button>
 </form>
-<a href="/admin">前のページへ戻る</a>
+<a href="/admin/managecontent/foodmenu">前のページへ戻る</a>
 </body>
 </html>

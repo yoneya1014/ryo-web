@@ -26,6 +26,7 @@ mongoose.connect(db_url, {
 //router file (Client)
 const indexRouter = require('./routes/index');
 const contactRouter = require('./routes/contact');
+const aboutRouter = require('./routes/dormitory');
 
 //router file (Administrator)
 const adminIndexRouter = require('./routes/admin/common');
@@ -33,8 +34,9 @@ const signInRouter = require('./routes/admin/manageuserinfo/signIn');
 const signOutRouter = require('./routes/admin/manageuserinfo/signOut');
 const initRouter = require('./routes/admin/manageuserinfo/init');
 const changeAdminDataRouter = require('./routes/admin/manageuserinfo/changeAdminData');
-const manageTopicsRouter = require('./routes/admin/topics/manageTopics');
-const manageFoodMenuRouter = require('./routes/admin/foodmenu/manageFoodMenu');
+const manageContentRouter = require('./routes/admin/managecontent/manageContent');
+const manageTopicsRouter = require('./routes/admin/managecontent/manageTopics');
+const manageFoodMenuRouter = require('./routes/admin/managecontent/manageFoodMenu');
 
 const app = express();
 
@@ -74,6 +76,7 @@ app.use(helmet());
 //include router config (Client)
 app.use('/', indexRouter);
 app.use('/contact', contactRouter);
+app.use('/about', aboutRouter);
 
 //include router config (Admin)
 app.use('/admin', adminIndexRouter);
@@ -81,8 +84,9 @@ app.use('/admin/signin', signInRouter);
 app.use('/admin/signout', signOutRouter);
 app.use('/admin/init', initRouter);
 app.use('/admin/changeadmindata', changeAdminDataRouter);
-app.use('/admin/managetopics', manageTopicsRouter);
-app.use('/admin/managefoodmenu', manageFoodMenuRouter);
+app.use('/admin/managecontent', manageContentRouter);
+app.use('/admin/managecontent/topics', manageTopicsRouter);
+app.use('/admin/managecontent/foodmenu', manageFoodMenuRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

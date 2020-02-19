@@ -91,6 +91,7 @@
         align-items: center;
         width: 800px;
         height: 600px;
+        left: 10%;
     }
 
     .modal {

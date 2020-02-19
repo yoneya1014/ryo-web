@@ -5,7 +5,7 @@
     <title>投稿の新規作成</title>
 </head>
 <body>
-<form role="form" action="/admin/managetopics/writenewtopics" name="writenewtopics" method="post"
+<form role="form" action="/admin/managecontent/topics/writenew" name="writenewtopics" method="post"
       enctype="multipart/form-data">
     <input type="hidden" name="_csrf" value="<%= _csrf %>"/>
     <label for="title">投稿のタイトル：</label>
@@ -22,7 +22,7 @@
     <br/>
     <button type="submit">投稿の登録</button>
     <br/>
-    <a href="/admin/managetopics">前のページへ戻る</a>
+    <a href="/admin/managecontent/topics">前のページへ戻る</a>
 </form>
 </body>
 </html>

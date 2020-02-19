@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>管理ページ トップ - 函館高専 春潮寮 Webページ</title>
+    <title>寮行事の投稿管理 - 函館高専 春潮寮 Webページ</title>
     <link type="text/css" rel="stylesheet" href="/stylesheets/bootstrap/bootstrap.min.css"/>
     <link type="text/css" rel="stylesheet" href="/stylesheets/admin/common/common.css"/>
     <script type="text/javascript" src="/javascripts/jquery/jquery-3.4.1.min.js"></script>
@@ -13,15 +13,15 @@
 <body>
 <div class="top-title">
     <img src="/images/common/site-logo.png"/>
-    <label id="title_label">函館高専 春潮寮 Webページ<br/>管理ページ トップ</label>
+    <label id="title_label">寮行事の投稿管理</label>
 </div>
 <main>
-    <a class="btn btn-primary" href="/admin/managecontent">各ページの内容管理</a>
+    <a class="btn btn-primary" href="/admin/managecontent/topics/writenew">投稿の新規作成</a>
     <br/>
-    <a class="btn btn-primary" href="/admin/changeadmindata">ユーザー情報の管理</a>
+    <a class="btn btn-primary" href="/admin/managecontent/topics/list/<%= new Date().toFormat('YYYY'); %>">過去の投稿の管理</a>
     <br/>
-    <a class="btn btn-primary" href="/admin/signout">サインアウト</a>
+    <a class="btn btn-primary" href="/admin/managecontent">前のページへ戻る</a>
 </main>
-<%- include('./timeLabel.ejs') %>
+<%- include('../../common/timeLabel.ejs') %>
 </body>
 </html>

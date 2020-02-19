@@ -11,11 +11,11 @@
     <% }else{
     for(var count = 0; count < from_dates.length; count++) { %>
         <p><%= from_dates[count].toFormat('YYYY年MM月DD日'); %>〜<%= to_dates[count].toFormat('YYYY年MM月DD日'); %></p>
-        <a href="/admin/managefoodmenu/listfoodmenu/delete/<%= objid[count]; %>">削除</a>
+        <a href="/admin/managecontent/foodmenu/list/delete/<%= objid[count]; %>">削除</a>
     <% }
     } %>
     <br/>
-    <a href="/admin/managefoodmenu">前のページへ戻る</a>
+    <a href="/admin/managecontent/foodmenu">前のページへ戻る</a>
 </main>
 </form>
 </body>

@@ -1,18 +1,27 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="content-type" content="text/html" charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>アクセス・お問い合わせ</title>
+    <meta name="author" content="National Institute of Technology, Hakodate College">
+    <meta name="description" content="春潮寮へのアクセス・お問い合わせ先について掲載しております">
+    <meta property="og:title" content="アクセス・お問い合わせ">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.hakodate-ct.ac.jp/~w-ryou/contact/">
+    <meta property="og:image" content="https://www.hakodate-ct.ac.jp/~w-ryou/images/common/site-logo.png">
+    <meta property="og:site_name" content="アクセス・お問い合わせ">
+    <meta property="og:description" content="春潮寮へのアクセス・お問い合わせ先について掲載しております">
     <link type="text/css" rel="stylesheet" href="/stylesheets/bootstrap/bootstrap.min.css"/>
-    <link rel="stylesheet" type="text/css" href="/stylesheets/contact.css"/>
+    <link type="text/css" rel="stylesheet" href="/stylesheets/contact/contact.css"/>
     <script type="text/javascript" src="/javascripts/jquery/jquery-3.4.1.min.js"></script>
     <script type="text/javascript" src="/javascripts/bootstrap/bootstrap.min.js"></script>
     <script type="text/javascript" src="/javascripts/popper/popper.min.js"></script>
-    <script type="text/javascript" src="/javascripts/contact.js"></script>
+    <script type="text/javascript" src="/javascripts/contact/contact.js"></script>
 </head>
 <body>
-<%- include('./common/header') %>
+<%- include('../common/header') %>
 <main>
     <div class="map-content">
         <div id="map">
@@ -26,7 +35,7 @@
             <span class="title-line line2"></span>
         </div>
         <div class="contact-info">
-            <p>〒042-8501</p>
+            <p>〒042-0953</p>
             <p>北海道函館市戸倉町14-1</p>
             <p>函館工業高等専門学校 春潮寮 寮務係</p>
             <p>TEL：0138-59-6337<br/>FAX：0138-59-6340</p>
@@ -71,7 +80,7 @@
         </div>
     </div>
 </main>
-<%- include('./common/footer') %>
+<%- include('../common/footer') %>
 <script type="text/javascript"
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD72wPdyTL4C0W-ckCp50IpiFXmnkY0rAA&callback=initMap" async
         defer></script>

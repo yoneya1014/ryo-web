@@ -23,17 +23,17 @@ const parseForm = bodyParser.urlencoded({extended: false});
 
 //投稿の管理ページトップ
 router.get('/', signInCheck, (req, res) => {
-    res.render('admin/topics/manageTopics');
+    res.render('admin/managecontent/topics/manageTopics');
 });
 
 //投稿の新規作成ページ
-router.get('/writenewtopics', csrfProtection, signInCheck, (req, res) => {
-    res.render('admin/topics/writeNewTopics', {
+router.get('/writenew', csrfProtection, signInCheck, (req, res) => {
+    res.render('admin/managecontent/topics/writeNewTopics', {
         _csrf: req.csrfToken()
     });
 });
 
-router.post('/writenewtopics', parseForm, csrfProtection, signInCheck, (req, res) => {
+router.post('/writenew', parseForm, csrfProtection, signInCheck, (req, res) => {
     const title = req.body.title;
     const description = req.body.description;
     const content = req.body.content;
@@ -87,12 +87,12 @@ router.post('/writenewtopics', parseForm, csrfProtection, signInCheck, (req, res
             req.session.error = true;
             res.redirect('/admin/error');
         }
-        res.redirect('/admin/managetopics');
+        res.redirect('/admin/managecontent/topics');
     });
 });
 
 //過去の投稿一覧表示用ページ
-router.get('/listtopics/:year', signInCheck, (req, res) => {
+router.get('/list/:year', signInCheck, (req, res) => {
     topics.find({
         date: {
             $gte: new Date(req.params.year + '-01-01T00:00:00+09:00'),
@@ -114,7 +114,7 @@ router.get('/listtopics/:year', signInCheck, (req, res) => {
             objId[count] = value._id;
             count++;
         });
-        res.render('admin/topics/listTopics', {
+        res.render('admin/managecontent/topics/listTopics', {
             dates: dates,
             objid: objId
         });
@@ -122,7 +122,7 @@ router.get('/listtopics/:year', signInCheck, (req, res) => {
 });
 
 //過去の投稿の削除用処理
-router.get('/listtopics/delete/:id', signInCheck, (req, res) => {
+router.get('/list/delete/:id', signInCheck, (req, res) => {
     const objId = req.params.id;
     topics.findOne({
         _id: objId
@@ -142,7 +142,7 @@ router.get('/listtopics/delete/:id', signInCheck, (req, res) => {
             }
         }
         data.remove();
-        res.redirect('/admin/managetopics/listtopics/' + new Date().toFormat('YYYY'));
+        res.redirect('/admin/managecontent/topics/list/' + new Date().toFormat('YYYY'));
     });
 });
 

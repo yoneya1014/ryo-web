@@ -27,6 +27,7 @@ label {
     display: flex;
     flex-direction: row;
     justify-content: center;
+    align-items: center;
     width: 400px;
     height: 75px;
     margin: auto;
@@ -36,12 +37,6 @@ label {
 .top-title img {
     width: 75px;
     height: 75px;
-}
-
-#time_label {
-    position: fixed;
-    right: 0;
-    bottom: 0;
 }
 
 #title_label {

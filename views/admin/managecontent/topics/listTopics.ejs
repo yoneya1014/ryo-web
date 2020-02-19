@@ -11,12 +11,11 @@
     <% }else{
     for(var count = 0; count < dates.length; count++) { %>
         <p><%= dates[count].toFormat('YYYY年MM月DD日HH24時MI分SS秒'); %></p>
-        <a href="/admin/managetopics/listtopics/edit/<%= objid[count] %>">編集</a>
-        <a href="/admin/managetopics/listtopics/delete/<%= objid[count]; %>">削除</a>
+        <a href="/admin/managecontent/topics/list/delete/<%= objid[count]; %>">削除</a>
     <% }
     } %>
     <br/>
-    <a href="/admin/managetopics">前のページへ戻る</a>
+    <a href="/admin/managecontent/topics/">前のページへ戻る</a>
 </main>
 </form>
 </body>
