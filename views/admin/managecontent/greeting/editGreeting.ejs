@@ -4,7 +4,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta http-equiv="content-type" content="text/html" charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>寮務主事挨拶の編集 - 函館高専 春潮寮 Webページ</title>
+    <title>
+        <%
+        if(person_type === 'secretary'){
+        %>寮務主事挨拶の編集 - 函館高専 春潮寮 Webページ
+        <% }else if(person_type === 'male'){ %>男子寮総代挨拶の編集 - 函館高専 春潮寮 Webページ
+        <% }else if(person_type === 'female'){ %>女子寮総代挨拶の編集 - 函館高専 春潮寮 Webページ
+        <% } %>
+    </title>
     <link type="text/css" rel="stylesheet" href="/stylesheets/bootstrap/bootstrap.min.css"/>
     <link type="text/css" rel="stylesheet" href="/stylesheets/admin/common/common.css"/>
     <script type="text/javascript" src="/javascripts/jquery/jquery-3.4.1.min.js"></script>
@@ -14,12 +21,12 @@
     <script type="text/javascript">
         $(() => {
             $(document).ready(() => {
-                const imageUri = '/images/greetings/<%= person_type %><%= image_ext %>';
+                const imageUri = '/images/greetings/<% if(person_type === 'secretary'){ %><%= person_type %><% }else{ %>representative_<%= person_type %><% } %><%= image_ext %>';
                 fetch(imageUri, {
                     method: 'GET'
                 }).then(res => {
                     if (res.status === 200) {
-                        $('#previous_image').attr('src', imageUri);
+                        $('#previous_image_space').html('<img src="' + imageUri + '" id="previous_image" class="greeting_image" /><input type="hidden" name="updateflag" value="true">');
                         $('#previous_image').css('opacity', 1);
                     }
                 });
@@ -29,11 +36,20 @@
 </head>
 <body>
 <div class="top-title">
-    <label id="title_label">寮務主事挨拶の編集</label>
+    <label id="title_label">
+        <%
+        if(person_type === 'secretary'){
+        %>寮務主事挨拶の編集
+        <% }else if(person_type === 'male'){ %>男子寮総代挨拶の編集
+        <% }else if(person_type === 'female'){ %>女子寮総代挨拶の編集
+        <% } %>
+    </label>
 </div>
 <main>
-    <form role="form" id="greeting_form" name="<%= person_type %>" action="/admin/managecontent/greeting/secretary"
+    <form role="form" id="greeting_form" name="<%= person_type %>"
+          action="/admin/managecontent/greeting/<% if(person_type === 'secretary'){ %>secretary<% }else{ %>representative<% } %>"
           method="post" enctype="multipart/form-data">
+        <input type="hidden" name="person_type" value="<%= person_type %>"/>
         <input type="hidden" name="_csrf" value="<%= _csrf %>"/>
         <div class="form-group">
             <label for="greeting_text">挨拶文：</label>
@@ -48,7 +64,8 @@
                 <div id="previous_image_view">
                     <label for="previous_image_space">古い画像</label>
                     <div id="previous_image_space">
-                        <img id="previous_image" class="greeting_image"/>
+                        <input type="hidden" name="updateflag" value="false"/>
+                        <label>古い画像が存在しません</label>
                     </div>
                 </div>
                 <span id="blank_space"></span>
