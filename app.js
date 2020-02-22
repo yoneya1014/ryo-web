@@ -38,6 +38,7 @@ const manageContentRouter = require('./routes/admin/managecontent/manageContent'
 const manageTopicsRouter = require('./routes/admin/managecontent/manageTopics');
 const manageFoodMenuRouter = require('./routes/admin/managecontent/manageFoodMenu');
 const manageGreetingRouter = require('./routes/admin/managecontent/manageGreeting');
+const manageNumberOfResidentsRouter = require('./routes/admin/managecontent/manageNumberOfResidents');
 
 const app = express();
 
@@ -89,6 +90,7 @@ app.use('/admin/managecontent', manageContentRouter);
 app.use('/admin/managecontent/topics', manageTopicsRouter);
 app.use('/admin/managecontent/foodmenu', manageFoodMenuRouter);
 app.use('/admin/managecontent/greeting', manageGreetingRouter);
+app.use('/admin/managecontent/numberofresidents', manageNumberOfResidentsRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

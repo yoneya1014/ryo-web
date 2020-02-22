@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="content-type" content="text/html" charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>寮行事の投稿管理 - 函館高専 春潮寮 Webページ</title>
+    <link type="text/css" rel="stylesheet" href="/stylesheets/bootstrap/bootstrap.min.css"/>
+    <link type="text/css" rel="stylesheet" href="/stylesheets/admin/common/common.css"/>
+    <script type="text/javascript" src="/javascripts/jquery/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="/javascripts/bootstrap/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/javascripts/popper/popper.min.js"></script>
+    <script type="text/javascript" src="/javascripts/admin/managecontent/sumAllValue.js"></script>
+</head>
+<body>
+<div class="top-title">
+    <img src="/images/common/site-logo.png"/>
+    <label id="title_label">入寮者数の編集</label>
+</div>
+<main>
+    <form name="numbers_table" action="/admin/managecontent/numberofresidents" method="post">
+        <input type="hidden" name="_csrf" value="<%= _csrf %>"/>
+        <h4>男子寮生 内訳</h4>
+        <table class="table">
+            <tr>
+                <th scope="col">区分</th>
+                <th scope="col">1組</th>
+                <th scope="col">2組</th>
+                <th scope="col">3組</th>
+                <th scope="col">4組</th>
+                <th scope="col">5組</th>
+                <th scope="col" class="title-col">小計</th>
+            </tr>
+            <tr>
+                <td scope="row">1年</td>
+                <td>
+                    <input type="tel" class="m-grade1" name="m-1-1" pattern="^[1-9][0-9]*" required/>
+                </td>
+                <td>
+                    <input type="tel" class="m-grade1" name="m-1-2" pattern="^[1-9][0-9]*" required/>
+                </td>
+                <td>
+                    <input type="tel" class="m-grade1" name="m-1-3" pattern="^[1-9][0-9]*" required/>
+                </td>
+                <td>
+                    <input type="tel" class="m-grade1" name="m-1-4" pattern="^[1-9][0-9]*" required/>
+                </td>
+                <td>
+                    <input type="tel" class="m-grade1" name="m-1-5" pattern="^[1-9][0-9]*" required/>
+                </td>
+                <td><label id="sum-m-1"></label></td>
+            </tr>
+        </table>
+        <br/>
+        <button class="btn btn-primary" type="submit">登録</button>
+        <a class="btn btn-primary" href="/admin/managecontent">前のページへ戻る</a>
+    </form>
+</main>
+</body>
+</html>

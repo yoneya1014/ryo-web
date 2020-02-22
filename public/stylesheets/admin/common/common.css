@@ -7,7 +7,7 @@ body {
 }
 
 main {
-    width: 40%;
+    width: 60%;
     margin: auto;
     display: flex;
     flex-direction: column;
@@ -103,4 +103,13 @@ label {
 #blank_space {
     display: block;
     width: 10%;
+}
+
+td, th {
+    width: 10%;
+    white-space: nowrap;
+}
+
+input {
+    font-size: 10%;
 }
