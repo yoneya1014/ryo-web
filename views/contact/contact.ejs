@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="content-type" content="text/html" charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>アクセス・お問い合わせ</title>
+    <meta name="author" content="National Institute of Technology, Hakodate College">
+    <meta name="description" content="春潮寮へのアクセス・お問い合わせ先について掲載しております">
+    <meta property="og:title" content="アクセス・お問い合わせ">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.hakodate-ct.ac.jp/~w-ryou/contact/">
+    <meta property="og:image" content="https://www.hakodate-ct.ac.jp/~w-ryou/images/common/site-logo.png">
+    <meta property="og:site_name" content="アクセス・お問い合わせ">
+    <meta property="og:description" content="春潮寮へのアクセス・お問い合わせ先について掲載しております">
+    <link type="text/css" rel="stylesheet" href="/stylesheets/bootstrap/bootstrap.min.css"/>
+    <link type="text/css" rel="stylesheet" href="/stylesheets/contact/contact.css"/>
+    <script type="text/javascript" src="/javascripts/jquery/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="/javascripts/bootstrap/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/javascripts/popper/popper.min.js"></script>
+    <script type="text/javascript" src="/javascripts/contact/contact.js"></script>
+</head>
+<body>
+<%- include('../common/header') %>
+<main>
+    <div class="map-content">
+        <div id="map">
+            <label id="map-status">読み込み中...</label>
+        </div>
+    </div>
+    <div class="contact-content">
+        <div class="contact-title">
+            <span class="title-line line1"></span>
+            <label>お問い合わせ</label>
+            <span class="title-line line2"></span>
+        </div>
+        <div class="contact-info">
+            <p>〒042-0953</p>
+            <p>北海道函館市戸倉町14-1</p>
+            <p>函館工業高等専門学校 春潮寮 寮務係</p>
+            <p>TEL：0138-59-6337<br/>FAX：0138-59-6340</p>
+            <p>Email：ryomucho@hakodate-ct.ac.jp</p>
+        </div>
+        <div class="contact-title">
+            <span class="title-line line1"></span>
+            <label>アクセス</label>
+            <span class="title-line line2"></span>
+        </div>
+        <div class="list-group">
+            <a class="list-group-item list-group-item-action" id="access-list1" href="javascript:void(0);">JR函館駅から</a>
+            <a class="list-group-item list-group-item-action" id="access-list2" href="javascript:void(0);">函館空港から</a>
+        </div>
+        <div class="modal js-modal1">
+            <div class="background-shadow js-modal-close"></div>
+            <div class="modal-content">
+                <div class="close-button">
+                    <span class="button-line" id="button-line1"></span>
+                    <span class="button-line" id="button-line2"></span>
+                </div>
+                <label>JR函館駅から</label>
+                <br/>
+                <p>・函館バス（82系統 滝沢町行き・2番のりば）に乗車、函館高専前にて下車（約35分）</p>
+                <p>・函館バス（95、96番など）に乗車し、湯倉神社前にて下車（約25分）、その後徒歩（約15分）</p>
+                <p>・函館市電（2、5番 湯の川行き）に乗車し、終点「湯の川」にて下車、その後徒歩（約15分）</p>
+                <p>・タクシーを利用（約20分）</p>
+            </div>
+        </div>
+        <div class="modal js-modal2">
+            <div class="background-shadow js-modal-close"></div>
+            <div class="modal-content">
+                <div class="close-button">
+                    <span class="button-line" id="button-line1"></span>
+                    <span class="button-line" id="button-line2"></span>
+                </div>
+                <label>函館空港から</label>
+                <br/>
+                <p>・函館バス（7A、7B、7E、7F、75、96系統）に乗車し、湯倉神社前にて下車（約15分）、その後徒歩（約15分）</p>
+                <p>・タクシーを利用（約10分）</p>
+            </div>
+        </div>
+    </div>
+</main>
+<%- include('../common/footer') %>
+<script type="text/javascript"
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD72wPdyTL4C0W-ckCp50IpiFXmnkY0rAA&callback=initMap" async
+        defer></script>
+</body>
+</html>

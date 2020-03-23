@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="content-type" content="text/html" charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>献立のアップロード</title>
+</head>
+<body>
+<form role="form" action="/admin/managecontent/foodmenu/uploadnew" name="uploadnewmenu" method="post"
+      enctype="multipart/form-data">
+    <input type="hidden" name="_csrf" value="<%= _csrf %>"/>
+    <label for="from">適用開始日時</label>
+    <input type="date" name="from" id="from" required/>
+    <label for="to">適用終了日時</label>
+    <input type="date" name="to" id="to" required/>
+    <label for="menufile">献立表ファイル</label>
+    <input type="file" accept="application/pdf" name="menufile" id="menufile" required/>
+    <button type="submit">アップロード</button>
+</form>
+<a href="/admin/managecontent/foodmenu">前のページへ戻る</a>
+</body>
+</html>

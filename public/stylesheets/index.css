@@ -1,0 +1,165 @@
+@media screen and (min-width: 1300px) {
+    main {
+        width: 100%;
+        height: auto;
+    }
+
+    /* トップページスライダー関連 */
+    .slider {
+        margin: 50px auto;
+        padding-left: 0px;
+        width: 70%;
+    }
+
+    .slide {
+        position: relative;
+    }
+
+    .slide__link {
+        color: #ffffff;
+        text-align: center;
+        transition: .5s;
+    }
+
+    .slider__link:hover {
+        color: #000000;
+    }
+
+    .slide img {
+        height: auto;
+        width: 100%;
+    }
+
+    .slide__content-wrap {
+        display: flex;
+        position: absolute;
+        left: 0%;
+        bottom: 0%;
+        width: 100%;
+        height: 30%;
+        background: linear-gradient(to bottom, transparent, #000000);
+        justify-content: center;
+        align-items: center;
+    }
+
+    .slide__content {
+        width: 96%;
+        height: 96%;
+        padding: 2%;
+        text-align: left;
+        color: #ffffff !important;
+    }
+
+    /*slick setting*/
+    .slick-prev:before,
+    .slick-next:before {
+        color: #000000;
+    }
+
+    /* スライダー下部のアーカイブページへのリンク関連 */
+    .news-archive-wrap {
+        width: 70%;
+        margin: auto;
+        text-align: right;
+    }
+
+    .news-archive {
+        color: #878787;
+        text-decoration: underline;
+        text-decoration-color: #878787;
+        transition: .5s;
+    }
+
+    .news-archive:hover {
+        color: #000000;
+        text-decoration-color: #000000;
+    }
+
+    /* ページのメインコンテンツ（寮食堂の献立リストなど） */
+    .main-content {
+        width: 90%;
+        padding: 50px 0 100px 0;
+        margin: auto;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+    }
+
+    .meal {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        align-items: center;
+    }
+
+    .meal label {
+        font-size: 1.5em;
+        padding: 5px;
+    }
+
+    .meal-list {
+        display: block;
+        width: 400px;
+        height: 500px;
+        overflow: scroll;
+        box-shadow: 0 0 8px gray;
+    }
+
+    .sns {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        align-items: center;
+    }
+
+    .sns label {
+        font-size: 1.5em;
+        padding: 5px;
+    }
+
+    .sns-content {
+        display: block;
+        width: 400px;
+        height: 500px;
+        overflow: scroll;
+        box-shadow: 0 0 8px gray;
+    }
+
+    .list-group {
+        box-sizing: border-box;
+    }
+
+    .list-group-item-action {
+        transition: .3s;
+    }
+
+    .list-group-item-action:hover {
+        color: #ffffff;
+        background-color: #007bff;
+    }
+
+    #top-image {
+        width: 100%;
+        height: 80vh;
+    }
+
+    .slick-prev {
+        width: 50px;
+        height: 50px;
+        left: -70px;
+    }
+
+    .slick-prev::before {
+        font-size: 50px;
+    }
+
+    .slick-next {
+        width: 50px;
+        height: 50px;
+        right: -70px;
+    }
+
+    .slick-next::before {
+        font-size: 50px;
+    }
+}

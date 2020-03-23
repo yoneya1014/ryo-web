@@ -1,40 +1,79 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="content-type" content="text/html" charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>函館高専 春潮寮</title>
+    <meta name="author" content="National Institute of Technology, Hakodate College">
+    <meta name="description" content="「函館高専 春潮寮」公式ホームページ">
+    <meta property="og:title" content="函館高専 春潮寮">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.hakodate-ct.ac.jp/~w-ryou/">
+    <meta property="og:image" content="https://www.hakodate-ct.ac.jp/~w-ryou/images/common/site-logo.png">
+    <meta property="og:site_name" content="函館高専 春潮寮">
+    <meta property="og:description" content="「函館高専 春潮寮」公式ホームページ">
     <link type="text/css" rel="stylesheet" href="/stylesheets/slick/slick-theme.css"/>
     <link type="text/css" rel="stylesheet" href="/stylesheets/bootstrap/bootstrap.min.css"/>
     <link type="text/css" rel="stylesheet" href="/stylesheets/slick/slick.css"/>
-    <link type="text/css" rel='stylesheet' href='/stylesheets/common/index.css'/>
+    <link type="text/css" rel='stylesheet' href='/stylesheets/index.css'/>
     <script type="text/javascript" src="/javascripts/jquery/jquery-3.4.1.min.js"></script>
     <script type="text/javascript" src="/javascripts/bootstrap/bootstrap.min.js"></script>
     <script type="text/javascript" src="/javascripts/popper/popper.min.js"></script>
     <script type="text/javascript" src="/javascripts/slick/slick.min.js"></script>
-    <script type="text/javascript" src="/javascripts/common/index.js"></script>
+    <script type="text/javascript" src="/javascripts/index.js"></script>
+    <script type="text/javascript" src="/javascripts/twitter/widgets.js" async></script>
 </head>
 <body>
 <%- include('./common/header') %>
-<ul class="slider">
-    <%
-    for(var count = 0;count < 3;count++){
-    %>
-        <li class="slide">
-            <a class="slide__link" href="#">
-                <img src="/images/no-image.png" alt="image">
-                <span class="slide__content-wrap">
-                            <span class="slide__content">
-                                <p class="slide__text">テキスト<%= count %></p>
-                            </span>
-                        </span>
-            </a>
-        </li>
-    <%
-    }
-    %>
-</ul>
-<div id="news-archive-wrap">
-    <a id="news-archive" href="#">過去のアーカイブはこちら</a>
-</div>
+<main>
+    <img src="/images/common/top-image.jpg" id="top-image"/>
+    <ul class="slider">
+        <%
+        data.forEach(obj => {
+        %>
+            <li class="slide">
+                <a class="slide__link" href="#">
+                    <img src="<%= obj.image_url %>img0.png" alt="image">
+                    <div class="slide__content-wrap">
+                        <div class="slide__content">
+                            <h2 class="slide-title"><%= obj.title %></h2>
+                            <p class="slide-summary"><%= obj.description %></p>
+                        </div>
+                    </div>
+                </a>
+            </li>
+        <%
+        });
+        %>
+    </ul>
+    <div class="news-archive-wrap">
+        <a class="news-archive" href="#">過去のアーカイブはこちら</a>
+    </div>
+    <div class="main-content">
+        <div class="meal">
+            <label>寮食堂の献立表</label>
+            <div class="meal-list">
+                <div class="list-group">
+                    <%
+                    for(var i = 1;i <= 15;i++){
+                    %>
+                        <a class="list-group-item list-group-item-action" href="#">リスト<%= i %></a>
+                    <%
+                    }
+                    %>
+                </div>
+            </div>
+        </div>
+        <div class="sns">
+            <label>公式Twitter</label>
+            <div class="sns-content">
+                <a class="twitter-timeline" href="https://twitter.com/yoneya1014?ref_src=twsrc%5Etfw">Tweets by
+                    yoneya1014</a>
+            </div>
+        </div>
+    </div>
+</main>
+<%- include('./common/footer') %>
 </body>
 </html>

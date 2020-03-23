@@ -1,17 +1,33 @@
-@media screen and (min-width: 1000px) {
+body {
+    margin: 0;
+    font-weight: 300;
+}
+
+*,
+*::before,
+*::after {
+    font-family: 'Hiragino Kaku Gothic Pro', 'ヒラギノ角ゴ Pro W3', 'メイリオ', Meiryo, 'ＭＳ Ｐゴシック', sans-serif;
+    box-sizing: inherit;
+}
+
+@media screen and (min-width: 1300px) {
+
     header {
         display: flex;
         width: 100%;
         height: 90px;
         flex-direction: row;
+        background-color: #ffffff;
+        box-shadow: 2px 0 4px gray;
     }
 
     nav {
         width: 60%;
         height: 100%;
+        box-sizing: border-box;
     }
 
-    nav .nav-menulist {
+    nav .nav-menu-list {
         width: 100%;
         height: 100%;
         margin: 0;
@@ -33,17 +49,29 @@
     #site-title {
         width: 40%;
         height: 100%;
-        margin: 0 0 0 10px;
-        display: flex;
+        margin: 0 0 0 20px;
+    }
+
+    #site-title a {
+        display: inline-flex;
+        width: auto;
+        height: 90px;
         flex-direction: row;
         align-items: center;
-        user-select: none;
+        color: #000000;
+        text-decoration: none;
+    }
+
+    #site-title label {
+        display: inline;
+        margin: 0;
+        cursor: pointer;
     }
 
     #site-logo {
         width: 80px;
         height: 80px;
-        padding: 10px;
+        padding: 5px;
         user-select: none;
     }
 
@@ -58,7 +86,7 @@
 
     .nav-menu {
         width: 60%;
-        height: 80px;
+        height: 90px;
         transition: .5s;
     }
 
@@ -118,11 +146,7 @@
         align-items: center;
     }
 
-    nav li {
-        padding: 5px;
-    }
-
-    nav .nav-menu-dropbutton {
+    nav .nav-menu-drop-button {
         display: block;
         width: 100%;
         height: 100%;
@@ -131,8 +155,8 @@
         text-decoration: none;
     }
 
-    nav .nav-menu-dropbutton::before,
-    nav .nav-menu-dropbutton::after {
+    nav .nav-menu-drop-button::before,
+    nav .nav-menu-drop-button::after {
         border-bottom: solid 1px #000000;
         bottom: 0;
         content: "";
@@ -143,16 +167,24 @@
         width: 0;
     }
 
-    nav .nav-menu-dropbutton::before {
+    nav .nav-menu-drop-button::before {
         left: 50%;
     }
 
-    nav .nav-menu-dropbutton::after {
+    nav .nav-menu-drop-button::after {
         right: 50%;
     }
 
-    nav .nav-menu-dropbutton:hover::before,
-    nav .nav-menu-dropbutton:hover::after {
+    nav .nav-menu-drop-button:hover::before,
+    nav .nav-menu-drop-button:hover::after {
         width: 50%;
+    }
+
+    #side-gradient {
+        width: 100vw;
+        height: 100vh;
+        position: fixed;
+        background: linear-gradient(to right, #00aeef, transparent 5%, transparent 95%, #00aeef);
+        z-index: -10000;
     }
 }

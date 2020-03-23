@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="content-type" content="text/html" charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>過去の投稿一覧</title>
+</head>
+<body>
+<main>
+    <% if(dates.length === 0){ %>
+        <p>該当する過去の投稿はありません</p>
+    <% }else{
+    for(var count = 0; count < dates.length; count++) { %>
+        <p><%= dates[count].toFormat('YYYY年MM月DD日HH24時MI分SS秒'); %></p>
+        <a href="/admin/managecontent/topics/list/delete/<%= objid[count]; %>">削除</a>
+    <% }
+    } %>
+    <br/>
+    <a href="/admin/managecontent/topics/">前のページへ戻る</a>
+</main>
+</form>
+</body>
+</html>

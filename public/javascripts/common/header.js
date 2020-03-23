@@ -6,12 +6,12 @@ $(function () {
         $(this).find('label').css('color', '#878787');
         $(this).find('span').css('border-color', '#878787 transparent transparent transparent');
     });
-    $('.nav-menu-dropbutton').click(function () {
+    $('.nav-menu-drop-button').click(function () {
         $(this).next('.nav-inner').slideToggle();
-        $('.nav-menu-dropbutton').not($(this)).next('.nav-inner').slideUp();
+        $('.nav-menu-drop-button').not($(this)).next('.nav-inner').slideUp();
     });
     $(document).on('click', function (e) {
-        if (!$(e.target).closest('ul.nav-menulist').length) {
+        if (!$(e.target).closest('ul.nav-menu-list').length) {
             $('.nav-inner').slideUp();
         }
     });

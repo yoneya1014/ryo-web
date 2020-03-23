@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="content-type" content="text/html" charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>投稿の新規作成</title>
+</head>
+<body>
+<form role="form" action="/admin/managecontent/topics/writenew" name="writenewtopics" method="post"
+      enctype="multipart/form-data">
+    <input type="hidden" name="_csrf" value="<%= _csrf %>"/>
+    <label for="title">投稿のタイトル：</label>
+    <input type="text" name="title" id="title" required/>
+    <br/>
+    <label for="description">投稿の概要：</label>
+    <textarea name="description" id="description" required></textarea>
+    <br/>
+    <label for="content">投稿の詳細；</label>
+    <textarea name="content" id="content" required></textarea>
+    <br/>
+    <label for="imgfiles">投稿の画像：</label>
+    <input type="file" accept="image/*" name="imgfiles" id="imgfiles" multiple/>
+    <br/>
+    <button type="submit">投稿の登録</button>
+    <br/>
+    <a href="/admin/managecontent/topics">前のページへ戻る</a>
+</form>
+</body>
+</html>

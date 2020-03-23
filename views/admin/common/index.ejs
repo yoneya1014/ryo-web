@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="content-type" content="text/html" charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>管理ページ トップ - 函館高専 春潮寮 Webページ</title>
+    <link type="text/css" rel="stylesheet" href="/stylesheets/bootstrap/bootstrap.min.css"/>
+    <link type="text/css" rel="stylesheet" href="/stylesheets/admin/common/common.css"/>
+    <script type="text/javascript" src="/javascripts/jquery/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="/javascripts/bootstrap/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/javascripts/popper/popper.min.js"></script>
+</head>
+<body>
+<div class="top-title">
+    <img src="/images/common/site-logo.png"/>
+    <label id="title_label">函館高専 春潮寮 Webページ<br/>管理ページ トップ</label>
+</div>
+<main>
+    <a class="btn btn-primary" href="/admin/managecontent">各ページの内容管理</a>
+    <br/>
+    <a class="btn btn-primary" href="/admin/changeadmindata">ユーザー情報の管理</a>
+    <br/>
+    <a class="btn btn-primary" href="/admin/signout">サインアウト</a>
+</main>
+<%- include('./timeLabel.ejs') %>
+</body>
+</html>

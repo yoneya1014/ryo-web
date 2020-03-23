@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="content-type" content="text/html" charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= target %>の変更</title>
+</head>
+<body>
+<% if(message !== ''){ %>
+    <p><%= message %></p>
+<% } %>
+<form role="form" action="/admin/changeadmindata<%= url_path %>" name="changeobject" method="post">
+    <input type="hidden" name="_csrf" value="<%= _csrf %>"/>
+    <label for="old_object">古い<%= target %>を入力：</label>
+    <input type="text" name="old_object" id="old_object"/>
+    <label for="new_object">新しい<%= target %>を入力：</label>
+    <input type="text" name="new_object" id="new_object"/>
+    <button type="submit">変更</button>
+</form>
+<a href="/admin/changeadmindata">前のページに戻る</a>
+</body>
+</html>
