@@ -1,0 +1,6 @@
+.env
+ryo.iml
+.idea/
+node_modules/
+public/images/
+public/other_objects/
