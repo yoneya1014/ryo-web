@@ -1,6 +1,0 @@
-.env
-node_modules/
-.idea/
-public/images/topics
-public/other_objects
-ryo.iml
